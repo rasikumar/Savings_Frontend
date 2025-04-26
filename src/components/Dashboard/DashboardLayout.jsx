@@ -26,7 +26,7 @@ const DashboardLayout = () => {
     <div className="h-screen flex flex-col">
       <Topbar showShadow={showShadow} />
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex md:flex-row flex-col flex-1 overflow-hidden">
         <Sidebar />
 
         <main ref={mainRef} className="flex-1 overflow-y-auto p-6">

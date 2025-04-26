@@ -17,6 +17,7 @@ import { useState } from "react";
 import { Spinner } from "../Spinner";
 import { Link, useNavigate } from "react-router";
 import { handleSendOtp } from "@/hooks/AuthHandles";
+import AuthBottomText from "../AuthBottomText";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Enter a valid email." }),
@@ -56,7 +57,7 @@ const SendOtp = () => {
           </p>
         </div>
       </div>
-      <div className="md:w-3/4 md:px-12 py-6 my-auto h-screen flex flex-col justify-between max-md:items-center">
+      <div className="md:w-3/4 w-full md:px-12 py-6 my-auto md:h-screen h-[40rem] flex flex-col justify-between max-md:items-center">
         <div className="flex items-center justify-between">
           <a href="#" className="md:flex hidden items-center gap-x-2 text-sm">
             <ChevronLeft />
@@ -119,15 +120,7 @@ const SendOtp = () => {
             </form>
           </Form>
         </div>
-        <div className="flex md:flex-row flex-col items-center justify-between max-md:gap-4">
-          <p className="text-sm text-center">
-            Copyright 2021 - 2022 FoxHub Inc. All rights Reserved
-          </p>
-          <span className="flex items-center text-sm gap-2">
-            <CircleHelp />
-            <a href="#">Need help?</a>
-          </span>
-        </div>
+        <AuthBottomText />
       </div>
     </div>
   );

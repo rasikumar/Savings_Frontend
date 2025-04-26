@@ -19,15 +19,15 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-64 h-full mt-5 mr-10">
-      <nav className="flex flex-col gap-4">
+    <aside className="md:w-64 md:h-full mt-5 mr-10">
+      <nav className="flex flex-row md:flex-col gap-4">
         {navItems.map((item) => (
           <Link
             key={item.path}
             to={item.path}
-            className={`flex items-center gap-3 px-4 py-2 rounded-r-full transition ${
+            className={`flex items-center gap-3 px-4 py-2 md:rounded-r-full transition ${
               location.pathname === item.path
-                ? "bg-[#59599B] font-semibold text-white"
+                ? "md:bg-[#59599B] text-[#59599B] border-b-4 border-[#59599B] font-semibold md:text-white"
                 : "hover:bg-gray-200"
             }`}
           >

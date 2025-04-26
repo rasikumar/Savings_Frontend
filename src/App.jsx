@@ -36,7 +36,7 @@ const App = () => {
           }
         >
           <Route index element={<Home />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="settings" element={<Profile />} />
           <Route path="days" element={<Days />} />
         </Route>
       </Routes>

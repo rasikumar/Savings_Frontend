@@ -49,3 +49,28 @@ export const resetPassword = async (updateData) => {
     return error;
   }
 };
+
+export const updateProfile = async (updateData, imageFile) => {
+  const formData = new FormData();
+
+  // Append text data (e.g., name, email, phone) to the FormData object
+  for (const key in updateData) {
+    formData.append(key, updateData[key]);
+  }
+
+  // Append the image file if it exists
+  if (imageFile) {
+    formData.append("profilePicture", imageFile); // Ensure the backend expects 'profilePicture'
+  }
+
+  try {
+    const response = await Instance.put(`${API}/auth/updateUser`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data", // This is important for file uploads
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};

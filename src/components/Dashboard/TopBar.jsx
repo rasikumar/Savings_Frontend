@@ -15,11 +15,23 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "../ui/hover-card";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useUser } from "@/context/UserContext";
+import { PHOTO } from "@/lib/api";
 
 const Topbar = ({ showShadow }) => {
   const { user } = useUser() || {};
+
+  const navigate = useNavigate(); // Hook to programmatically navigate
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login"); // Navigates to login page
+  };
+
+  const handleProfile = () => {
+    navigate("./settings"); // Navigates to profile page
+  };
 
   return (
     <header
@@ -31,7 +43,7 @@ const Topbar = ({ showShadow }) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-x-2 justify-center">
           <img src={MoneyBox} alt="Logo" className="w-10" />
-          <h2 className="font-bold">Piggy365</h2>
+          <h2 className="font-bold hidden md:block">Piggy365</h2>
         </div>
         <div className="flex items-center gap-4">
           <span className="flex items-center text-sm gap-2 cursor-pointer">
@@ -51,18 +63,22 @@ const Topbar = ({ showShadow }) => {
           <DropdownMenu>
             <DropdownMenuTrigger
               aschild
-              className="flex gap-4 items-center p-1 min-w-40"
+              className="flex gap-4 items-center p-1 "
             >
               <Avatar className="h-8 w-8 rounded-full">
                 <AvatarImage
-                  src={user?.profilePicture}
+                  src={
+                    user?.profilePicture?.includes("https://api.dicebear.com")
+                      ? user.profilePicture
+                      : `${PHOTO}${user.profilePicture}`
+                  }
                   alt={user?.name || "No User"}
                 />
                 <AvatarFallback className="rounded-lg">
                   {user?.name}
                 </AvatarFallback>
               </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
+              <div className="md:grid hidden text-left text-sm leading-tight ">
                 <span className="truncate font-semibold">
                   {user?.name || "No User"}
                 </span>
@@ -77,7 +93,13 @@ const Topbar = ({ showShadow }) => {
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                   <Avatar>
                     <AvatarImage
-                      src={user?.profilePicture}
+                      src={
+                        user?.profilePicture?.includes(
+                          "https://api.dicebear.com"
+                        )
+                          ? user.profilePicture
+                          : `${PHOTO}${user.profilePicture}`
+                      }
                       alt={user?.name || "No User"}
                     />
                     <AvatarFallback className="rounded-lg">
@@ -96,17 +118,13 @@ const Topbar = ({ showShadow }) => {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem>Account</DropdownMenuItem>
+                <DropdownMenuItem onClick={handleProfile}>
+                  Account
+                </DropdownMenuItem>
                 <DropdownMenuItem>Upgrade Plan</DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={() => {
-                  localStorage.removeItem("token");
-                  localStorage.removeItem("user");
-                  window.location.href = "/login";
-                }}
-              >
+              <DropdownMenuItem onClick={handleLogout}>
                 <LogOutIcon />
                 Log out
               </DropdownMenuItem>

@@ -13,7 +13,6 @@ import { MainLogo, MoneyWithPiggy } from "@/assets";
 import {
   ArrowRightIcon,
   ChevronLeft,
-  CircleHelp,
   Lock,
   Mail,
   User,
@@ -24,6 +23,7 @@ import { useState } from "react";
 import { Spinner } from "../Spinner";
 import { handleSignUp } from "@/hooks/AuthHandles";
 import { Link, useNavigate } from "react-router";
+import AuthBottomText from "../AuthBottomText";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -72,7 +72,7 @@ const SignUp = () => {
           </p>
         </div>
       </div>
-      <div className="md:w-3/4 md:px-12 py-6 my-auto h-screen flex flex-col justify-between max-md:items-center">
+      <div className="md:w-3/4 w-full md:px-12 py-6 my-auto md:h-screen h-[40rem] flex flex-col justify-between max-md:items-center">
         <div className="flex items-center justify-between">
           <a href="#" className="md:flex hidden items-center gap-x-2 text-sm">
             <ChevronLeft />
@@ -183,15 +183,7 @@ const SignUp = () => {
             </form>
           </Form>
         </div>
-        <div className="flex md:flex-row flex-col items-center justify-between max-md:gap-4">
-          <p className="text-sm text-center">
-            Copyright 2021 - 2022 FoxHub Inc. All rights Reserved
-          </p>
-          <span className="flex items-center text-sm gap-2">
-            <CircleHelp />
-            <a href="#">Need help?</a>
-          </span>
-        </div>
+        <AuthBottomText />
       </div>
     </div>
   );

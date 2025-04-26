@@ -3,6 +3,7 @@ import {
   resetPassword,
   sendOtp,
   signUp,
+  updateProfile,
   verifySendOtp,
 } from "@/services/auth";
 import { toast } from "sonner";
@@ -99,5 +100,20 @@ export const changePassword = async (payload, setIsSubmitting, navigate) => {
     toast(error.message || "Something went Wrong");
   } finally {
     setIsSubmitting(false);
+  }
+};
+
+export const updateDatas = async (updateData, profilePicture, setUser) => {
+  try {
+    const res = await updateProfile(updateData, profilePicture);
+    console.log(res)
+    if (res.status === true) {
+      toast(res.message);
+      setUser(res.updatedUser);
+    } else {
+      toast(res.response?.data?.message || "Failed to Update Profile");
+    }
+  } catch (error) {
+    toast(error.message || "Something went Wrong");
   }
 };
