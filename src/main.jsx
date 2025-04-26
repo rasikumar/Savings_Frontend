@@ -5,12 +5,15 @@ import App from "./App.jsx";
 import { Toaster } from "./components/ui/sonner";
 import { BrowserRouter } from "react-router";
 import { HelmetProvider } from "react-helmet-async";
+import Provider from "./context/Provider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <HelmetProvider>
-        <App />
+        <Provider>
+          <App />
+        </Provider>
         <Toaster />
       </HelmetProvider>
     </BrowserRouter>

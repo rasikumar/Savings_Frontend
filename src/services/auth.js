@@ -6,7 +6,6 @@ export const signUp = async (signUpData) => {
     const response = await Instance.post(`${API}/auth/signup`, signUpData);
     return response.data;
   } catch (error) {
-    // console.log("failed to Singup", error);
     return error;
   }
 };

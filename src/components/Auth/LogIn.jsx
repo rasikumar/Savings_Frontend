@@ -23,6 +23,7 @@ import { useState } from "react";
 import { Spinner } from "../Spinner";
 import { handleLogIn } from "@/hooks/AuthHandles";
 import { Link, useNavigate } from "react-router";
+import { useUser } from "@/context/UserContext";
 
 const formSchema = z.object({
   emailorName: z.string(),
@@ -31,6 +32,7 @@ const formSchema = z.object({
     .min(6, { message: "Password must be at least 6 characters." }),
 });
 const LogIn = () => {
+  const { setUser } = useUser() || {};
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -45,7 +47,8 @@ const LogIn = () => {
     },
   });
 
-  const onSubmit = (values) => handleLogIn(values, setIsSubmitting, navigate);
+  const onSubmit = (values) =>
+    handleLogIn(values, setIsSubmitting, navigate, setUser);
 
   return (
     <div className="flex">

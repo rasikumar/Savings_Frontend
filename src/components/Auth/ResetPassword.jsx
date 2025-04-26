@@ -61,7 +61,7 @@ const ResetPassword = () => {
         token, // this is the reset token
       };
       changePassword(payload, setIsSubmitting, () => {
-        navigate("/login", { replace: true }); // Navigate to home and replace history
+        navigate("/login", { replace: true });
       });
     } else {
       toast("Passwords do not match.");

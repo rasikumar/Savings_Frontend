@@ -13,7 +13,7 @@ export const handleSignUp = async (values, setIsSubmitting, navigate) => {
     const result = await signUp(values);
     if (result.status === true) {
       toast(result.message);
-      navigate("/dashboard");
+      navigate("/login");
     } else {
       toast(result.response?.data?.message || "Signup Failed");
     }
@@ -24,11 +24,21 @@ export const handleSignUp = async (values, setIsSubmitting, navigate) => {
   }
 };
 
-export const handleLogIn = async (values, setIsSubmitting, navigate) => {
+export const handleLogIn = async (
+  values,
+  setIsSubmitting,
+  navigate,
+  setUser
+) => {
   setIsSubmitting(true);
   try {
     const result = await logIn(values);
     if (result.status === true) {
+      const token = result.token || result.data?.token;
+      if (token) {
+        localStorage.setItem("token", token);
+      }
+      setUser(result.user);
       toast(result.message);
       navigate("/dashboard");
     } else {
