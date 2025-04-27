@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -25,20 +24,7 @@ import { changePassword } from "@/hooks/AuthHandles";
 import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
 import AuthBottomText from "../AuthBottomText";
-
-const formSchema = z
-  .object({
-    newPassword: z
-      .string()
-      .min(6, { message: "Password must be at least 6 characters." }),
-    confirmPassword: z
-      .string()
-      .min(6, { message: "Password must be at least 6 characters." }),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: "Passwords do not match.",
-    path: ["confirmPassword"],
-  });
+import { resetSchema } from "@/schema/schema";
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -48,7 +34,7 @@ const ResetPassword = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const form = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(resetSchema),
     defaultValues: {
       newPassword: "",
       confirmPassword: "",

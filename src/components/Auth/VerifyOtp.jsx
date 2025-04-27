@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -23,16 +22,14 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import AuthBottomText from "../AuthBottomText";
+import { otpSchema } from "@/schema/schema";
 
-const formSchema = z.object({
-  otp: z.string(),
-});
 const VerifyOtp = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(otpSchema),
     defaultValues: {
       otp: "",
     },

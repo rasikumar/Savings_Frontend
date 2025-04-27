@@ -1,5 +1,5 @@
 import AnalyticsCards from "@/components/AnalyticsCards";
-import { BigAnalytics } from "@/components/BigAnalytics";
+// import { BigAnalytics } from "@/components/BigAnalytics";
 import WelcomeBanner from "@/components/WelcomeBanner";
 import { useUser } from "@/context/UserContext";
 import { DashboardData } from "@/hooks/DashBoardHandles";
@@ -19,7 +19,7 @@ const Home = () => {
     <div className="flex flex-col items-center justify-center w-full gap-4">
       <WelcomeBanner user={user} />
       <AnalyticsCards data={data} loading={isSubmitting} error={error} />
-      <BigAnalytics />
+      {/* <BigAnalytics /> */}
     </div>
   );
 };

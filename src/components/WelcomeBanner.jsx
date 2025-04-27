@@ -9,7 +9,7 @@ const WelcomeBanner = ({ user }) => {
             : `${PHOTO}${user.profilePicture}`
         }
         alt={user?.name || "No User"}
-        className="max-w-24 min-w-24 rounded-full bg-red-400"
+        className="w-24 h-24 object-cover rounded-full"
       />
       <div className="flex flex-col items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-1 ">

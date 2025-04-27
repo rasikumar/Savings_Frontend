@@ -103,10 +103,15 @@ export const changePassword = async (payload, setIsSubmitting, navigate) => {
   }
 };
 
-export const updateDatas = async (updateData, profilePicture, setUser) => {
+export const updateDatas = async (
+  updateData,
+  profilePicture,
+  setUser,
+  setIsSubmitting
+) => {
+  setIsSubmitting(true);
   try {
     const res = await updateProfile(updateData, profilePicture);
-    console.log(res)
     if (res.status === true) {
       toast(res.message);
       setUser(res.updatedUser);
@@ -115,5 +120,7 @@ export const updateDatas = async (updateData, profilePicture, setUser) => {
     }
   } catch (error) {
     toast(error.message || "Something went Wrong");
+  } finally {
+    setIsSubmitting(false);
   }
 };

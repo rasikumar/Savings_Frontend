@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -25,13 +24,8 @@ import { handleLogIn } from "@/hooks/AuthHandles";
 import { Link, useNavigate } from "react-router";
 import { useUser } from "@/context/UserContext";
 import AuthBottomText from "../AuthBottomText";
+import { loginSchema } from "@/schema/schema";
 
-const formSchema = z.object({
-  emailorName: z.string(),
-  password: z
-    .string()
-    .min(1, { message: "Password must be at least 6 characters." }),
-});
 const LogIn = () => {
   const { setUser } = useUser() || {};
   const navigate = useNavigate();
@@ -41,7 +35,7 @@ const LogIn = () => {
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
   const form = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       emailorName: "",
       password: "",

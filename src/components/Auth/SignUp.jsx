@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -24,14 +23,9 @@ import { Spinner } from "../Spinner";
 import { handleSignUp } from "@/hooks/AuthHandles";
 import { Link, useNavigate } from "react-router";
 import AuthBottomText from "../AuthBottomText";
+import { signupSchema } from "@/schema/schema";
 
-const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Enter a valid email." }),
-  password: z
-    .string()
-    .min(6, { message: "Password must be at least 6 characters." }),
-});
+
 const SignUp = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,7 +34,7 @@ const SignUp = () => {
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
   const form = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(signupSchema),
     defaultValues: {
       name: "",
       email: "",
