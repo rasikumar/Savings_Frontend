@@ -29,7 +29,7 @@ const DashboardLayout = () => {
       <div className="flex md:flex-row flex-col flex-1 overflow-hidden">
         <Sidebar />
 
-        <main ref={mainRef} className="flex-1 overflow-y-auto p-6">
+        <main ref={mainRef} className="flex-1 overflow-y-auto p-6 max-md:pb-16">
           <Outlet />
         </main>
       </div>
